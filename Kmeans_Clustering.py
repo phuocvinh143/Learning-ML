@@ -43,7 +43,7 @@ def kmeans_update_centers(X, labels, K):
 
 def has_converged(centers, new_centers):
     # return True if two sets of centers are the same
-    return (set([tuple(a) for a in centers]) == set([tuple(a) for a in new_centers]))
+    return set([tuple(a) for a in centers]) == set([tuple(a) for a in new_centers])
 
 
 def kmeans(X, K):
@@ -57,7 +57,7 @@ def kmeans(X, K):
             break
         centers.append(new_centers)
         it += 1
-    return (centers, labels, it)
+    return centers, labels, it
 
 
 def kmeans_with_scikit_learn_module(X, K):
@@ -67,11 +67,13 @@ def kmeans_with_scikit_learn_module(X, K):
     pred_label = kmeans.predict(X)
     kmeans_display(X, pred_label)
 
+
 def kmeans_with_algorithm(X, K):
     (centers, labels, it) = kmeans(X, K)
     print('Centers found by algorithm:')
     print(centers[-1])
     kmeans_display(X, labels[-1])
+
 
 np.random.seed(11)
 
